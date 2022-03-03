@@ -5,7 +5,6 @@ import pandas_datareader as pdr
 def getData(stocks, start, end):
     stockData = pdr.get_data_yahoo(stocks, start=start, end=end)
     stockData = stockData['Close']
-
     returns = stockData.pct_change()
     meanReturns = returns.mean()
     covMatrix = returns.cov()
@@ -23,11 +22,11 @@ stocklist = ['AAPL', 'MSFT', 'GOOG', 'AMZN']
 # stocks=[stock for stock in stocklist]
 # print(stocks)
 
-weights = np.array([0.2, 0.3, 0.1, 0.4])
+weights = np.array([0.6, 0.1, 0.1, 0.1])
 
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days=365)
-print(getData(stocklist, startDate, endDate))
+# print(getData(stocklist, startDate, endDate))
 
 meanReturns, covMatrix=getData(stocklist, startDate, endDate)
 returns, std = portfolioPerformance(weights, meanReturns, covMatrix)
